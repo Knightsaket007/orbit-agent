@@ -1,6 +1,31 @@
+import { executeTask } from "../../services/task.service";
+
 export function PromptBox() {
-  return /*html*/`
-<section class="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
+
+    queueMicrotask(() => {
+        const button = document.querySelector("#execute-btn") as HTMLButtonElement;
+        console.log("button", button)
+        button?.addEventListener("click", async () => {
+
+            const textarea = document.querySelector("#prompt") as HTMLTextAreaElement;
+
+            const prompt = textarea.value.trim();
+
+            if (!prompt) return;
+
+            console.log(prompt);
+
+            const result = await executeTask({
+                prompt,
+            });
+
+            console.log(result);
+
+        });
+    })
+
+ return ( /*html*/`
+ <section class="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
 
     <label class="mb-3 block text-sm font-medium text-zinc-200">
         Describe your task
@@ -22,5 +47,6 @@ export function PromptBox() {
     </div>
 
 </section>
-`;
+    
+`);
 }
