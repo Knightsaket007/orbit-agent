@@ -1,3 +1,3 @@
 export interface TaskRequest {
-  prompt: string;
+  prompt: string | "";
 }
